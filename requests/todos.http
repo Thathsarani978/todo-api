@@ -1,0 +1,59 @@
+### Create a new Todo
+
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+    "title": "Study REST API",
+    "description": "Learn Node.js and Express",
+    "state": "todo"
+}
+
+### Get all todos
+
+GET http://localhost:3000/todos
+
+### Get a single todo by ID
+
+GET http://localhost:3000/todos/fca2a927-3675-46c1-a48c-ab3373aed2dc
+
+### Update a todo
+
+PATCH http://localhost:3000/todos/50844fbc-5971-49d8-aaa7-90813dd82419
+Content-Type: application/json
+
+{
+    "state": "doing"
+}
+
+### Delete a todo
+
+DELETE http://localhost:3000/todos/d97cfa86-4b53-4c77-b1b0-1516fcf961f6
+
+### Test missing title
+
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+    "description": "Learn REST API"
+}
+
+### Test invalid state
+
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+    "title": "Study REST API",
+    "state": "finished"
+}
+
+### Test PATCH invalid state
+
+PATCH http://localhost:3000/todos/9f69f224-26be-4706-ba4f-f53594cf5347
+Content-Type: application/json
+
+{
+    "state": "finished"
+}
