@@ -9,6 +9,25 @@ Content-Type: application/json
     "state": "todo"
 }
 
+### Create a Todo with doing state
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+    "title": "Learn REST API",
+    "description": "Practice Node.js and Express",
+    "state": "doing"
+}
+
+### Create a Todo with done state
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+    "title": "Learn HTML",
+    "description": "Complete HTML basics",
+    "state": "done"
+}
 ### Get all todos
 
 GET http://localhost:3000/todos
@@ -56,4 +75,77 @@ Content-Type: application/json
 
 {
     "state": "finished"
+}
+
+### Get all todos
+GET http://localhost:3000/todos
+
+### Get todos with todo state
+GET http://localhost:3000/todos?state=todo
+
+### Get todos with doing state
+GET http://localhost:3000/todos?state=doing
+
+### Get todos with done state
+GET http://localhost:3000/todos?state=done
+
+### Test invalid state
+GET http://localhost:3000/todos?state=finished
+
+### Test valid PATCH - update title
+
+PATCH http://localhost:3000/todos/7f998a3a-0d6a-49d1-bf55-8a0cf6f69299
+Content-Type: application/json
+
+{
+    "title": "Learning REST API with Node.js"
+}
+
+### Test PATCH with empty title
+
+PATCH http://localhost:3000/todos/7f998a3a-0d6a-49d1-bf55-8a0cf6f69299
+Content-Type: application/json
+
+{
+    "title": ""
+}
+
+### Test PATCH with invalid state
+
+PATCH http://localhost:3000/todos/7f998a3a-0d6a-49d1-bf55-8a0cf6f69299
+Content-Type: application/json
+
+{
+    "state": "finished"
+}
+
+### Test PATCH with non-existing ID
+
+PATCH http://localhost:3000/todos/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+    "title": "Updated Todo"
+}
+
+### Test DELETE - delete an existing todo
+
+DELETE http://localhost:3000/todos/8552fa80-f3ee-4ff3-9681-67e2a1f771d2
+
+### Verify deleted todo
+
+GET http://localhost:3000/todos/8552fa80-f3ee-4ff3-9681-67e2a1f771d2
+
+### Test DELETE with non-existing ID
+
+DELETE http://localhost:3000/todos/00000000-0000-0000-0000-000000000000
+
+### Test malformed JSON
+
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+    "title": "Test malformed JSON",
+    "state": "todo",
 }

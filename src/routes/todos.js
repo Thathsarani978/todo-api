@@ -7,10 +7,32 @@ const router = express.Router()
 
 let todos = []
 
-// GET all todos
+
+
+// GET all todos or filter by state
 
 router.get('/', (req, res) => {
-    res.json(todos)
+
+    const state = req.query.state
+
+    // If no state is provided, return all todos
+    if (!state) {
+        return res.json(todos)
+    }
+
+    // Validate state
+    const validStates = ['todo', 'doing', 'done']
+
+    if (!validStates.includes(state)) {
+        return res.status(400).json({
+            message: 'Invalid state. Use todo, doing or done'
+        })
+    }
+
+    // Filter todos by state
+    const filteredTodos = todos.filter(todo => todo.state === state)
+
+    res.json(filteredTodos)
 })
 
 // POST - create a new todo
